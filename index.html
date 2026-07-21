@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IMT Ghaziabad RACE Company Updates | IMTIIM</title>
+<meta name="description" content="Latest RACE Club company updates, SIP preparation PDFs, interview insights and company-specific guidance for IMT Ghaziabad students." />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="IMT Ghaziabad RACE Company Updates | IMTIIM" />
+<meta property="og:description" content="Latest RACE Club company updates, SIP preparation PDFs, interview insights and company-specific guidance for IMT Ghaziabad students." />
+<meta property="og:type" content="website" />
+<link rel="stylesheet" href="css/race.css" />
+</head>
+<body>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav class="r-nav">
+  <div class="r-container r-nav-inner">
+    <a href="index.html" class="r-logo">IMT<span>IIM</span></a>
+    <div class="r-nav-actions">
+      <a href="index.html" class="r-nav-back">← Back to IMTIIM</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section class="r-hero">
+  <div class="r-container">
+    <span class="r-eyebrow"><span class="r-dot"></span> IMT Ghaziabad · RACE Club</span>
+    <h1>IMT Ghaziabad <span class="grad">RACE Company Updates</span></h1>
+    <p>Latest company preparation PDFs, interview insights, eligibility criteria and important updates released by the RACE Club.</p>
+    <div class="r-hero-cta">
+      <a href="#browse" class="r-btn r-btn-primary">Browse Updates ↓</a>
+    </div>
+    <div class="r-hero-stats">
+      <div class="r-hero-stat"><b id="statTotal">—</b><span>Company Updates</span></div>
+      <div class="r-hero-stat"><b id="statCategories">9</b><span>Categories</span></div>
+      <div class="r-hero-stat"><b id="statRecent">—</b><span>Added This Week</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ SEARCH + FILTERS ══════════════════════ -->
+<div class="r-toolbar" id="browse">
+  <div class="r-container">
+    <div class="r-search-row">
+      <div class="r-search">
+        <span class="r-search-ic">🔍</span>
+        <input id="raceSearch" type="text" placeholder="Search by company name or keyword…" autocomplete="off" />
+      </div>
+      <span class="r-result-count" id="resultCount"></span>
+    </div>
+    <div class="r-filters" id="raceFilters">
+      <button class="r-filter-pill active" data-cat="All">All</button>
+      <!-- category pills injected by race.js -->
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ GRID ══════════════════════ -->
+<main class="r-main">
+  <div class="r-container">
+    <div class="r-grid" id="raceGrid">
+      <!-- skeletons / cards injected by race.js -->
+    </div>
+    <div class="r-load-more" id="loadMoreWrap" style="display:none">
+      <button id="loadMoreBtn" class="r-btn r-btn-ghost">Load more updates</button>
+    </div>
+  </div>
+</main>
+
+<footer class="r-footer">
+  <div class="r-container">
+    <p><b>IMTIIM</b> · RACE Club Updates for IMT Ghaziabad · <a href="index.html" style="color:var(--r-accent-2)">www.imtiim.com</a></p>
+  </div>
+</footer>
+
+<div class="r-toast" id="raceToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/race.js"></script>
+</body>
+</html>
