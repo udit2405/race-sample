@@ -108,6 +108,30 @@ img{max-width:100%;display:block}
 .r-footer{border-top:1px solid var(--r-border);padding:34px 0;text-align:center;color:var(--r-muted-2);font-size:.82rem}
 .r-footer b{color:var(--r-muted)}
 
+/* --------------------------------------------------------- admin modal --- */
+.r-modal-back{position:fixed;inset:0;z-index:400;background:rgba(5,7,14,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.r-modal-back.show{display:flex}
+.r-modal{width:100%;max-width:460px;background:var(--r-bg-alt);border:1px solid var(--r-border-2);border-radius:var(--r-radius);padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.r-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.r-modal-head h3{font-family:var(--r-display);font-size:1.25rem;color:#fff}
+.r-modal-close{width:34px;height:34px;border-radius:9px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-muted);display:grid;place-items:center;font-size:1rem}
+.r-modal-close:hover{color:#fff;background:var(--r-surface-2)}
+.r-modal p.r-modal-sub{color:var(--r-muted);font-size:.88rem;margin-bottom:18px}
+.r-field{margin-bottom:16px}
+.r-field label{display:block;font-size:.8rem;font-weight:600;color:var(--r-muted);margin-bottom:7px}
+.r-field input[type=text],.r-field input[type=password]{width:100%;background:var(--r-surface);border:1.5px solid var(--r-border);color:var(--r-text);padding:12px 14px;border-radius:11px;font-size:.94rem;font-family:inherit}
+.r-field input:focus{outline:none;border-color:var(--r-accent);background:var(--r-surface-2)}
+.r-drop{border:1.6px dashed var(--r-border-2);border-radius:12px;padding:26px 18px;text-align:center;color:var(--r-muted);transition:all .18s;cursor:pointer}
+.r-drop:hover,.r-drop.drag{border-color:var(--r-accent);background:var(--r-surface);color:#fff}
+.r-drop b{display:block;color:#fff;font-family:var(--r-display);margin-bottom:4px}
+.r-drop span{font-size:.8rem;color:var(--r-muted-2)}
+.r-modal-err{color:var(--r-rose,#fb7185);font-size:.82rem;margin-top:-8px;margin-bottom:12px;min-height:1em}
+.r-hide{display:none!important}
+.r-admin-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.r-admin-actions .r-btn{flex:1;padding:11px 14px;font-size:.85rem}
+.r-link-btn{background:none;border:none;color:var(--r-accent-2);font-size:.82rem;font-weight:600;cursor:pointer;text-decoration:underline;padding:0}
+.r-count-note{color:var(--r-muted-2);font-size:.8rem;margin-top:10px;text-align:center}
+
 @media (max-width:860px){.r-hero-stats{gap:28px}}
 @media (max-width:640px){
   .r-container{padding:0 16px}.r-hero{padding:52px 0 32px}.r-grid{grid-template-columns:1fr}
@@ -122,6 +146,7 @@ img{max-width:100%;display:block}
   <div class="r-container r-nav-inner">
     <a href="https://www.imtiim.com" class="r-logo">IMT<span>IIM</span></a>
     <div class="r-nav-actions">
+      <button id="adminOpen" class="r-nav-back" type="button">🔒 Admin</button>
       <a href="https://www.imtiim.com" class="r-nav-back">← Back to IMTIIM</a>
     </div>
   </div>
@@ -173,8 +198,46 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
+<!-- ══════════════════════ ADMIN MODAL ══════════════════════ -->
+<div class="r-modal-back" id="adminModal">
+  <div class="r-modal">
+    <div class="r-modal-head">
+      <h3>RACE Admin</h3>
+      <button class="r-modal-close" id="adminClose" type="button" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Step 1: login -->
+    <div id="adminLogin">
+      <p class="r-modal-sub">Enter the admin username to upload company updates.</p>
+      <div class="r-field">
+        <label for="adminUser">Username</label>
+        <input id="adminUser" type="text" placeholder="Username" autocomplete="off" />
+      </div>
+      <div class="r-modal-err" id="adminErr"></div>
+      <button class="r-btn r-btn-primary r-btn-block" id="adminLoginBtn" style="width:100%" type="button">Unlock</button>
+    </div>
+
+    <!-- Step 2: upload -->
+    <div id="adminPanel" class="r-hide">
+      <p class="r-modal-sub">Upload an Excel/CSV file — its rows appear as company update cards on this page.</p>
+      <input id="adminFile" type="file" accept=".xlsx,.xls,.csv" class="r-hide" />
+      <div class="r-drop" id="adminDrop">
+        <b>Click to choose an Excel file</b>
+        <span>.xlsx, .xls or .csv — or drag &amp; drop here</span>
+      </div>
+      <div class="r-modal-err" id="adminUploadErr"></div>
+      <p class="r-count-note" id="adminCountNote"></p>
+      <div class="r-admin-actions">
+        <button class="r-link-btn" id="adminTemplate" type="button">↓ Download template</button>
+        <button class="r-link-btn" id="adminClear" type="button" style="color:var(--r-rose,#fb7185)">Clear all updates</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="r-toast" id="raceToast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 /* ============================================================================
    IMTIIM RACE Club — self-contained page logic (no backend).
@@ -185,33 +248,19 @@ img{max-width:100%;display:block}
   'use strict';
 
   const RACE_CATEGORIES = ['Consulting','FMCG','Banking','Finance','Product','Sales & Marketing','Analytics','Operations','General'];
+  const CATSET = RACE_CATEGORIES.map(c=>c.toLowerCase());
 
-  // ---- Sample data. Replace `pdf` links with your own PDFs to go live. ------
-  const daysAgo = n => { const d = new Date(); d.setDate(d.getDate() - n); return d.toISOString().slice(0,10); };
-  const SAMPLE_PDF = 'https://pdfobject.com/pdf/sample.pdf';
+  const ADMIN_USERNAME = '2026Race';   // login username
+  const STORE_KEY = 'race_updates_v1'; // localStorage key (this browser only)
 
-  const RACE_UPDATES = [
-    { company:'McKinsey & Company', category:'Consulting', date:daysAgo(1), views:412, downloads:188,
-      desc:'Full SIP prep pack — PST practice sets, case interview frameworks, guesstimate drills and the latest eligibility criteria for the 2026 cohort.', pdf:SAMPLE_PDF },
-    { company:'Hindustan Unilever (HUL)', category:'FMCG', date:daysAgo(2), views:534, downloads:301,
-      desc:'HUL UFLP interview insights — brand-building cases, market-sizing questions and a breakdown of the group-discussion round with sample topics.', pdf:SAMPLE_PDF },
-    { company:'Goldman Sachs', category:'Banking', date:daysAgo(3), views:287, downloads:142,
-      desc:'IB & markets prep — technical finance questions, valuation basics, behavioural fit guide and CV pointers tailored to the GS process.', pdf:SAMPLE_PDF },
-    { company:'Bain & Company', category:'Consulting', date:daysAgo(6), views:198, downloads:97,
-      desc:'Bain case library with profitability, M&A and pricing cases, plus interviewer expectations and the written-case format used on campus.', pdf:SAMPLE_PDF },
-    { company:'Amazon', category:'Product', date:daysAgo(8), views:356, downloads:170,
-      desc:'APM/PM prep — leadership principles decoded, product-design and product-improvement question banks, and estimation practice.', pdf:SAMPLE_PDF },
-    { company:'Procter & Gamble', category:'FMCG', date:daysAgo(10), views:221, downloads:110,
-      desc:'P&G Peak Performance test guide, the 8-factor interview format and reasoning-test practice with worked solutions.', pdf:SAMPLE_PDF },
-    { company:'JP Morgan Chase', category:'Finance', date:daysAgo(12), views:176, downloads:83,
-      desc:'Corporate & investment banking prep — markets primer, accounting fundamentals and a HireVue behavioural response guide.', pdf:SAMPLE_PDF },
-    { company:'Nielsen IQ', category:'Analytics', date:daysAgo(15), views:143, downloads:64,
-      desc:'Analytics role prep — case studies on retail measurement, SQL/Excel screening tips and a guesstimate + business-sense set.', pdf:SAMPLE_PDF },
-    { company:'Asian Paints', category:'Operations', date:daysAgo(18), views:129, downloads:58,
-      desc:'Supply-chain & operations SIP guide — plant-visit expectations, aptitude test structure and past interview experiences.', pdf:SAMPLE_PDF },
-    { company:'Deloitte', category:'Consulting', date:daysAgo(20), views:264, downloads:121,
-      desc:'S&O consulting prep — case frameworks, group-case round strategy, partner-interview tips and eligibility cut-offs.', pdf:SAMPLE_PDF },
-  ].map((r, i) => ({ id:'u' + (i+1), ...r }));
+  /* -------- storage: updates are saved in this browser's localStorage ------- */
+  function loadUpdates(){
+    try{ const raw=localStorage.getItem(STORE_KEY); return raw?JSON.parse(raw):[]; }
+    catch(_){ return []; }
+  }
+  function saveUpdates(list){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }catch(_){}
+  }
 
   const PAGE_SIZE = 6;
   const State = { all:[], filtered:[], visibleCount:PAGE_SIZE, query:'', category:'All' };
@@ -255,9 +304,10 @@ img{max-width:100%;display:block}
         <span>⬇ ${rec.downloads||0}</span>
       </div>
       <div class="r-card-actions">
-        <a class="r-btn r-btn-primary" href="${esc(rec.pdf)}" target="_blank" rel="noopener" data-action="view">View PDF</a>
-        <a class="r-btn r-btn-ghost" href="${esc(rec.pdf)}" target="_blank" rel="noopener" data-action="download">Download</a>
-        <button class="r-card-icon-btn" data-action="copy" title="Copy link">🔗</button>
+        ${rec.pdf
+          ? `<a class="r-btn r-btn-primary" href="${esc(rec.pdf)}" target="_blank" rel="noopener" data-action="view">View / Download</a>
+             <button class="r-card-icon-btn" data-action="copy" title="Copy link">🔗</button>`
+          : `<span class="r-btn r-btn-ghost" style="cursor:default;opacity:.6">No link provided</span>`}
       </div>
     </article>`;
   }
@@ -266,8 +316,10 @@ img{max-width:100%;display:block}
     const grid=$('#raceGrid');
     const slice=State.filtered.slice(0,State.visibleCount);
     if(State.filtered.length===0){
-      grid.innerHTML=`<div class="r-empty" style="grid-column:1/-1"><div class="r-empty-ic">📭</div>
-        <h3>No updates match your search.</h3><p>Try a different company name or category.</p></div>`;
+      const empty = State.all.length===0
+        ? `<h3>No company updates yet.</h3><p>RACE Club admins can add updates from the 🔒 Admin button above.</p>`
+        : `<h3>No updates match your search.</h3><p>Try a different company name or category.</p>`;
+      grid.innerHTML=`<div class="r-empty" style="grid-column:1/-1"><div class="r-empty-ic">📭</div>${empty}</div>`;
       $('#loadMoreWrap').style.display='none'; $('#resultCount').textContent=''; return;
     }
     grid.innerHTML=slice.map(cardHtml).join('');
@@ -281,7 +333,6 @@ img{max-width:100%;display:block}
       const rec=State.all.find(r=>r.id===card.dataset.id); if(!rec) return;
       const btn=e.target.closest('[data-action]'); if(!btn) return;
       const action=btn.dataset.action;
-      if(action==='download'){ rec.downloads=(rec.downloads||0)+1; toast('Opening PDF…','success'); }
       if(action==='view'){ rec.views=(rec.views||0)+1; }
       if(action==='copy'){ e.preventDefault();
         try{ await navigator.clipboard.writeText(rec.pdf); }catch(_){}
@@ -311,10 +362,120 @@ img{max-width:100%;display:block}
     $('#statRecent').textContent=State.all.filter(r=>isRecent(r.date)).length;
   }
 
-  function boot(){
-    State.all=RACE_UPDATES.slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
-    buildFilterPills(); wireSearch(); wireGridActions(); wireLoadMore();
+  function refreshFromStore(){
+    State.all=loadUpdates().slice().sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+    State.visibleCount=PAGE_SIZE;
     updateHeroStats(); applyFilters();
+  }
+
+  /* ==========================================================================
+     ADMIN — login + Excel/CSV upload (stored in this browser's localStorage)
+     ========================================================================== */
+  const pick = (row, keys) => {
+    for(const k of Object.keys(row)){
+      const norm=k.trim().toLowerCase();
+      if(keys.includes(norm)) return row[k];
+    }
+    return '';
+  };
+  function excelDate(v){
+    if(v==null||v==='') return new Date().toISOString().slice(0,10);
+    if(typeof v==='number'){ // Excel serial date
+      const d=new Date(Math.round((v-25569)*86400*1000));
+      if(!isNaN(d)) return d.toISOString().slice(0,10);
+    }
+    const d=new Date(v);
+    return isNaN(d)? new Date().toISOString().slice(0,10) : d.toISOString().slice(0,10);
+  }
+  function normCategory(v){
+    const s=String(v||'').trim();
+    const i=CATSET.indexOf(s.toLowerCase());
+    return i>=0 ? RACE_CATEGORIES[i] : (s || 'General');
+  }
+  function rowsToUpdates(rows){
+    return rows.map((row,idx)=>{
+      const company=String(pick(row,['company','company name','name','organisation','organization'])||'').trim();
+      if(!company) return null;
+      return {
+        id:'x'+Date.now()+'_'+idx,
+        company,
+        category:normCategory(pick(row,['category','type','sector','domain'])),
+        desc:String(pick(row,['description','desc','details','summary','notes'])||'').trim(),
+        date:excelDate(pick(row,['date','upload date','added','posted'])),
+        pdf:String(pick(row,['link','pdf','pdf link','url','file','drive link','document'])||'').trim(),
+        views:0, downloads:0
+      };
+    }).filter(Boolean);
+  }
+
+  function wireAdmin(){
+    const modal=$('#adminModal'), loginBox=$('#adminLogin'), panel=$('#adminPanel');
+    const userIn=$('#adminUser'), err=$('#adminErr'), upErr=$('#adminUploadErr'), note=$('#adminCountNote');
+    const fileIn=$('#adminFile'), drop=$('#adminDrop');
+
+    function open(){ modal.classList.add('show'); err.textContent=''; setTimeout(()=>userIn.focus(),50); refreshNote(); }
+    function close(){ modal.classList.remove('show'); }
+    function refreshNote(){ const n=loadUpdates().length; note.textContent = n? `${n} update${n===1?'':'s'} currently live on this page.` : 'No updates yet — upload an Excel to add some.'; }
+
+    $('#adminOpen').addEventListener('click',open);
+    $('#adminClose').addEventListener('click',close);
+    modal.addEventListener('click',e=>{ if(e.target===modal) close(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+
+    function tryLogin(){
+      if(userIn.value.trim()===ADMIN_USERNAME){
+        loginBox.classList.add('r-hide'); panel.classList.remove('r-hide'); err.textContent=''; refreshNote();
+      } else { err.textContent='Incorrect username.'; }
+    }
+    $('#adminLoginBtn').addEventListener('click',tryLogin);
+    userIn.addEventListener('keydown',e=>{ if(e.key==='Enter') tryLogin(); });
+
+    /* ---- file handling ---- */
+    drop.addEventListener('click',()=>fileIn.click());
+    ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
+    ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
+    drop.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+    fileIn.addEventListener('change',()=>{ if(fileIn.files[0]) handleFile(fileIn.files[0]); });
+
+    function handleFile(file){
+      upErr.textContent='';
+      if(typeof XLSX==='undefined'){ upErr.textContent='Spreadsheet reader failed to load — check your connection and reload.'; return; }
+      const reader=new FileReader();
+      reader.onload=e=>{
+        try{
+          const wb=XLSX.read(e.target.result,{type:'array'});
+          const ws=wb.Sheets[wb.SheetNames[0]];
+          const rows=XLSX.utils.sheet_to_json(ws,{defval:''});
+          const updates=rowsToUpdates(rows);
+          if(updates.length===0){ upErr.textContent='No rows with a Company name were found. Check the column headings.'; return; }
+          const merged=loadUpdates().concat(updates);
+          saveUpdates(merged);
+          refreshFromStore(); refreshNote();
+          toast(`Added ${updates.length} update${updates.length===1?'':'s'}`,'success');
+        }catch(err){ console.error(err); upErr.textContent='Could not read that file. Please upload a valid .xlsx, .xls or .csv.'; }
+        fileIn.value='';
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    /* ---- template + clear ---- */
+    $('#adminTemplate').addEventListener('click',()=>{
+      const sample=[{Company:'McKinsey & Company',Category:'Consulting',Description:'SIP prep pack — PST practice, case frameworks and eligibility criteria.',Date:new Date().toISOString().slice(0,10),Link:'https://drive.google.com/your-pdf-link'}];
+      const ws=XLSX.utils.json_to_sheet(sample);
+      const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Updates');
+      XLSX.writeFile(wb,'RACE-updates-template.xlsx');
+    });
+    $('#adminClear').addEventListener('click',()=>{
+      if(!loadUpdates().length){ toast('Nothing to clear'); return; }
+      if(confirm('Remove ALL company updates from this page? This cannot be undone.')){
+        saveUpdates([]); refreshFromStore(); refreshNote(); toast('All updates cleared','success');
+      }
+    });
+  }
+
+  function boot(){
+    buildFilterPills(); wireSearch(); wireGridActions(); wireLoadMore(); wireAdmin();
+    refreshFromStore();
   }
   document.addEventListener('DOMContentLoaded',boot);
 })();
