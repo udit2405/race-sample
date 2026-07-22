@@ -6,23 +6,16 @@
 <title>IMT Ghaziabad RACE Company Updates | IMTIIM</title>
 <meta name="description" content="Latest RACE Club company updates, SIP preparation PDFs, interview insights and company-specific guidance for IMT Ghaziabad students." />
 <meta name="robots" content="index, follow" />
-<meta property="og:title" content="IMT Ghaziabad RACE Company Updates | IMTIIM" />
-<meta property="og:description" content="Latest RACE Club company updates, SIP preparation PDFs, interview insights and company-specific guidance for IMT Ghaziabad students." />
-<meta property="og:type" content="website" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <style>
-/* ============================================================================
-   IMTIIM RACE Club — Dark premium theme (self-contained, no backend)
-   ============================================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
 :root{
   --r-bg:#0a0e1a;--r-bg-alt:#0f1526;--r-surface:rgba(255,255,255,.04);--r-surface-2:rgba(255,255,255,.07);
   --r-border:rgba(255,255,255,.10);--r-border-2:rgba(255,255,255,.16);--r-text:#f1f3fb;--r-muted:#9aa3c0;
   --r-muted-2:#6b7395;--r-accent:#6366f1;--r-accent-2:#818cf8;--r-violet:#a855f7;--r-green:#34d399;
-  --r-radius:16px;--r-radius-sm:11px;--r-font:'Inter',system-ui,-apple-system,sans-serif;
+  --r-rose:#fb7185;--r-radius:16px;--r-font:'Inter',system-ui,-apple-system,sans-serif;
   --r-display:'Plus Jakarta Sans','Inter',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -38,21 +31,28 @@ img{max-width:100%;display:block}
 ::selection{background:rgba(99,102,241,.4);color:#fff}
 .r-container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
 
+/* nav */
 .r-nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--r-border)}
 .r-nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
 .r-logo{font-family:var(--r-display);font-size:1.2rem;font-weight:800;letter-spacing:-.4px;color:#fff}
 .r-logo span{color:var(--r-accent-2)}
-.r-nav-actions{display:flex;align-items:center;gap:14px}
-.r-nav-back{font-size:.85rem;font-weight:600;color:var(--r-muted);border:1px solid var(--r-border);padding:8px 16px;border-radius:99px;transition:all .2s}
-.r-nav-back:hover{color:#fff;border-color:var(--r-border-2);background:var(--r-surface)}
+.r-nav-actions{display:flex;align-items:center;gap:12px}
+.r-nav-btn{font-size:.85rem;font-weight:600;color:var(--r-muted);border:1px solid var(--r-border);padding:8px 16px;border-radius:99px;transition:all .2s;background:none;cursor:pointer}
+.r-nav-btn:hover{color:#fff;border-color:var(--r-border-2);background:var(--r-surface)}
+.r-nav-btn.admin-active{color:var(--r-accent-2);border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.08)}
 
-.r-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:11px;font-size:.92rem;font-weight:600;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap}
+/* btn */
+.r-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:11px;font-size:.92rem;font-weight:600;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap;cursor:pointer;border:none;font-family:inherit}
 .r-btn:active{transform:scale(.97)}
+.r-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 .r-btn-primary{background:linear-gradient(120deg,var(--r-accent),var(--r-violet));color:#fff;box-shadow:0 8px 26px -8px rgba(99,102,241,.6)}
-.r-btn-primary:hover{box-shadow:0 10px 32px -6px rgba(99,102,241,.75);transform:translateY(-1px)}
+.r-btn-primary:hover:not(:disabled){box-shadow:0 10px 32px -6px rgba(99,102,241,.75);transform:translateY(-1px)}
 .r-btn-ghost{background:var(--r-surface);color:var(--r-text);border:1px solid var(--r-border)}
-.r-btn-ghost:hover{background:var(--r-surface-2);border-color:var(--r-border-2)}
+.r-btn-ghost:hover:not(:disabled){background:var(--r-surface-2);border-color:var(--r-border-2)}
+.r-btn-danger{background:rgba(251,113,133,.12);color:var(--r-rose);border:1px solid rgba(251,113,133,.25)}
+.r-btn-danger:hover:not(:disabled){background:rgba(251,113,133,.2)}
 
+/* hero */
 .r-hero{padding:76px 0 44px;text-align:center}
 .r-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-accent-2);font-size:.8rem;font-weight:700;letter-spacing:.3px;padding:8px 16px;border-radius:99px}
 .r-eyebrow .r-dot{width:6px;height:6px;border-radius:50%;background:var(--r-green);box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:r-pulse 2s infinite}
@@ -65,28 +65,32 @@ img{max-width:100%;display:block}
 .r-hero-stat b{display:block;font-family:var(--r-display);font-size:1.7rem;font-weight:800;color:#fff}
 .r-hero-stat span{color:var(--r-muted-2);font-size:.8rem;font-weight:500}
 
+/* toolbar */
 .r-toolbar{position:sticky;top:66px;z-index:60;padding:18px 0;background:rgba(10,14,26,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--r-border)}
 .r-search-row{display:flex;gap:12px;align-items:center}
 .r-search{flex:1;position:relative}
 .r-search input{width:100%;background:var(--r-surface);border:1.5px solid var(--r-border);color:var(--r-text);padding:13px 16px 13px 44px;border-radius:12px;font-size:.94rem;font-family:inherit;transition:border-color .2s,background .2s}
 .r-search input::placeholder{color:var(--r-muted-2)}
 .r-search input:focus{outline:none;border-color:var(--r-accent);background:var(--r-surface-2)}
-.r-search-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--r-muted-2);pointer-events:none;font-size:1rem}
+.r-search-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--r-muted-2);pointer-events:none}
 .r-result-count{color:var(--r-muted-2);font-size:.8rem;white-space:nowrap}
 .r-filters{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.r-filter-pill{padding:8px 16px;border-radius:99px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-muted);font-size:.82rem;font-weight:600;transition:all .18s;white-space:nowrap}
+.r-filter-pill{padding:8px 16px;border-radius:99px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-muted);font-size:.82rem;font-weight:600;transition:all .18s;white-space:nowrap;cursor:pointer}
 .r-filter-pill:hover{color:#fff;border-color:var(--r-border-2)}
 .r-filter-pill.active{background:linear-gradient(120deg,var(--r-accent),var(--r-violet));color:#fff;border-color:transparent;box-shadow:0 6px 18px -6px rgba(99,102,241,.6)}
 
+/* grid */
 .r-main{padding:36px 0 90px}
 .r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+
+/* card */
 .r-card{background:var(--r-surface);border:1px solid var(--r-border);border-radius:var(--r-radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:transform .22s,border-color .22s,background .22s;position:relative;backdrop-filter:blur(6px)}
 .r-card:hover{transform:translateY(-4px);border-color:var(--r-border-2);background:var(--r-surface-2)}
 .r-card-top{display:flex;align-items:flex-start;gap:14px}
 .r-card-logo{width:52px;height:52px;border-radius:12px;background:var(--r-bg-alt);border:1px solid var(--r-border);display:grid;place-items:center;overflow:hidden;flex:0 0 52px;font-family:var(--r-display);font-weight:800;color:var(--r-accent-2);font-size:1.2rem}
 .r-card-head{flex:1;min-width:0}
 .r-card-name{font-family:var(--r-display);font-weight:700;font-size:1.08rem;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.r-card-meta{display:flex;gap:8px;align-items:center;margin-top:5px;font-size:.76rem;color:var(--r-muted-2);flex-wrap:wrap}
+.r-card-meta{display:flex;gap:8px;align-items:center;margin-top:5px;flex-wrap:wrap}
 .r-badge{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.3px;text-transform:uppercase}
 .r-badge-cat{background:rgba(99,102,241,.16);color:var(--r-accent-2);border:1px solid rgba(99,102,241,.3)}
 .r-badge-new{background:rgba(52,211,153,.16);color:var(--r-green);border:1px solid rgba(52,211,153,.3)}
@@ -95,45 +99,77 @@ img{max-width:100%;display:block}
 .r-card-stats span{display:flex;align-items:center;gap:4px}
 .r-card-actions{display:flex;gap:9px;margin-top:2px}
 .r-card-actions .r-btn{flex:1;padding:11px 14px;font-size:.84rem}
-.r-card-icon-btn{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:var(--r-surface);border:1px solid var(--r-border);display:grid;place-items:center;color:var(--r-muted);transition:all .18s;font-size:.9rem}
-.r-card-icon-btn:hover{color:#fff;background:var(--r-surface-2);border-color:var(--r-border-2)}
+.r-card-del{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:8px;background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--r-rose);display:none;place-items:center;font-size:.75rem;cursor:pointer;transition:all .18s}
+.r-card-del:hover{background:rgba(251,113,133,.25)}
+body.admin-mode .r-card-del{display:grid}
 
-.r-empty{text-align:center;padding:90px 24px;color:var(--r-muted)}
+/* skeletons */
+.r-skel{background:var(--r-surface);border:1px solid var(--r-border);border-radius:var(--r-radius);padding:22px;display:flex;flex-direction:column;gap:14px}
+.r-skel-line{height:14px;border-radius:6px;background:linear-gradient(90deg,var(--r-surface) 25%,var(--r-surface-2) 50%,var(--r-surface) 75%);background-size:200% 100%;animation:r-shimmer 1.5s infinite}
+@keyframes r-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.r-skel-top{display:flex;gap:14px;align-items:center}
+.r-skel-logo{width:52px;height:52px;border-radius:12px;flex:0 0 52px;background:linear-gradient(90deg,var(--r-surface) 25%,var(--r-surface-2) 50%,var(--r-surface) 75%);background-size:200% 100%;animation:r-shimmer 1.5s infinite}
+
+/* empty */
+.r-empty{text-align:center;padding:90px 24px;color:var(--r-muted);grid-column:1/-1}
 .r-empty .r-empty-ic{font-size:3rem;margin-bottom:18px;opacity:.6}
 .r-empty h3{color:#fff;font-family:var(--r-display);font-size:1.3rem;margin-bottom:8px}
+
 .r-load-more{text-align:center;margin-top:36px}
-.r-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140%);z-index:300;background:#161b2e;border:1px solid var(--r-border-2);color:#fff;padding:13px 22px;border-radius:12px;font-size:.88rem;font-weight:600;box-shadow:0 16px 44px rgba(0,0,0,.5);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;gap:10px}
+.r-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140%);z-index:500;background:#161b2e;border:1px solid var(--r-border-2);color:#fff;padding:13px 22px;border-radius:12px;font-size:.88rem;font-weight:600;box-shadow:0 16px 44px rgba(0,0,0,.5);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .r-toast.show{transform:translateX(-50%) translateY(0)}
 .r-toast.success{border-color:rgba(52,211,153,.4)}
+.r-toast.error{border-color:rgba(251,113,133,.4)}
 .r-footer{border-top:1px solid var(--r-border);padding:34px 0;text-align:center;color:var(--r-muted-2);font-size:.82rem}
 .r-footer b{color:var(--r-muted)}
 
-/* --------------------------------------------------------- admin modal --- */
-.r-modal-back{position:fixed;inset:0;z-index:400;background:rgba(5,7,14,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+/* modal */
+.r-modal-back{position:fixed;inset:0;z-index:400;background:rgba(5,7,14,.76);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
 .r-modal-back.show{display:flex}
-.r-modal{width:100%;max-width:460px;background:var(--r-bg-alt);border:1px solid var(--r-border-2);border-radius:var(--r-radius);padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-.r-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.r-modal-head h3{font-family:var(--r-display);font-size:1.25rem;color:#fff}
-.r-modal-close{width:34px;height:34px;border-radius:9px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-muted);display:grid;place-items:center;font-size:1rem}
+.r-modal{width:100%;max-width:480px;background:var(--r-bg-alt);border:1px solid var(--r-border-2);border-radius:var(--r-radius);padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);margin:auto}
+.r-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.r-modal-head h3{font-family:var(--r-display);font-size:1.2rem;color:#fff;font-weight:700}
+.r-modal-close{width:32px;height:32px;border-radius:9px;background:var(--r-surface);border:1px solid var(--r-border);color:var(--r-muted);display:grid;place-items:center;cursor:pointer;transition:all .18s}
 .r-modal-close:hover{color:#fff;background:var(--r-surface-2)}
-.r-modal p.r-modal-sub{color:var(--r-muted);font-size:.88rem;margin-bottom:18px}
-.r-field{margin-bottom:16px}
-.r-field label{display:block;font-size:.8rem;font-weight:600;color:var(--r-muted);margin-bottom:7px}
-.r-field input[type=text],.r-field input[type=password]{width:100%;background:var(--r-surface);border:1.5px solid var(--r-border);color:var(--r-text);padding:12px 14px;border-radius:11px;font-size:.94rem;font-family:inherit}
-.r-field input:focus{outline:none;border-color:var(--r-accent);background:var(--r-surface-2)}
-.r-drop{border:1.6px dashed var(--r-border-2);border-radius:12px;padding:26px 18px;text-align:center;color:var(--r-muted);transition:all .18s;cursor:pointer}
-.r-drop:hover,.r-drop.drag{border-color:var(--r-accent);background:var(--r-surface);color:#fff}
-.r-drop b{display:block;color:#fff;font-family:var(--r-display);margin-bottom:4px}
-.r-drop span{font-size:.8rem;color:var(--r-muted-2)}
-.r-modal-err{color:var(--r-rose,#fb7185);font-size:.82rem;margin-top:-8px;margin-bottom:12px;min-height:1em}
-.r-hide{display:none!important}
-.r-admin-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.r-admin-actions .r-btn{flex:1;padding:11px 14px;font-size:.85rem}
-.r-link-btn{background:none;border:none;color:var(--r-accent-2);font-size:.82rem;font-weight:600;cursor:pointer;text-decoration:underline;padding:0}
-.r-count-note{color:var(--r-muted-2);font-size:.8rem;margin-top:10px;text-align:center}
 
-@media (max-width:860px){.r-hero-stats{gap:28px}}
-@media (max-width:640px){
+.r-field{margin-bottom:18px}
+.r-field label{display:block;font-size:.8rem;font-weight:600;color:var(--r-muted);margin-bottom:7px;letter-spacing:.2px}
+.r-field input[type=text],.r-field input[type=password],.r-field select,.r-field textarea{
+  width:100%;background:var(--r-surface);border:1.5px solid var(--r-border);color:var(--r-text);
+  padding:12px 14px;border-radius:11px;font-size:.92rem;font-family:inherit;transition:border-color .2s,background .2s}
+.r-field textarea{resize:vertical;min-height:80px;line-height:1.5}
+.r-field select option{background:#0f1526;color:#f1f3fb}
+.r-field input:focus,.r-field select:focus,.r-field textarea:focus{outline:none;border-color:var(--r-accent);background:var(--r-surface-2)}
+
+.r-drop{border:1.6px dashed var(--r-border-2);border-radius:12px;padding:28px 18px;text-align:center;color:var(--r-muted);transition:all .18s;cursor:pointer;margin-bottom:4px}
+.r-drop:hover,.r-drop.drag{border-color:var(--r-accent);background:var(--r-surface)}
+.r-drop b{display:block;color:#fff;font-family:var(--r-display);margin-bottom:4px;font-size:1rem}
+.r-drop span{font-size:.8rem;color:var(--r-muted-2)}
+.r-drop.has-file{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.05)}
+.r-drop.has-file b{color:var(--r-green)}
+
+.r-err{color:var(--r-rose);font-size:.82rem;margin-bottom:12px;min-height:1.1em}
+.r-divider{border:none;border-top:1px solid var(--r-border);margin:20px 0}
+.r-link-btn{background:none;border:none;color:var(--r-muted-2);font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:underline;padding:0;transition:color .15s}
+.r-link-btn:hover{color:var(--r-text)}
+.r-link-btn.danger{color:var(--r-rose)}
+
+/* upload list in admin */
+.r-upload-list{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto}
+.r-upload-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--r-surface);border:1px solid var(--r-border);border-radius:10px;padding:10px 14px;font-size:.82rem}
+.r-upload-item-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--r-text)}
+.r-upload-item-cat{color:var(--r-muted-2);font-size:.74rem;white-space:nowrap}
+
+.r-progress{height:4px;background:var(--r-surface-2);border-radius:99px;overflow:hidden;margin-top:8px;display:none}
+.r-progress.show{display:block}
+.r-progress-bar{height:100%;background:linear-gradient(90deg,var(--r-accent),var(--r-violet));border-radius:99px;transition:width .3s}
+
+/* hide util */
+.r-hide{display:none!important}
+
+/* responsive */
+@media(max-width:860px){.r-hero-stats{gap:28px}}
+@media(max-width:640px){
   .r-container{padding:0 16px}.r-hero{padding:52px 0 32px}.r-grid{grid-template-columns:1fr}
   .r-search-row{flex-direction:column;align-items:stretch}.r-result-count{text-align:left}
   .r-card-actions{flex-direction:column}.r-card-actions .r-btn{width:100%}
@@ -146,8 +182,8 @@ img{max-width:100%;display:block}
   <div class="r-container r-nav-inner">
     <a href="https://www.imtiim.com" class="r-logo">IMT<span>IIM</span></a>
     <div class="r-nav-actions">
-      <button id="adminOpen" class="r-nav-back" type="button">🔒 Admin</button>
-      <a href="https://www.imtiim.com" class="r-nav-back">← Back to IMTIIM</a>
+      <button id="adminOpen" class="r-nav-btn" type="button">🔒 Admin</button>
+      <a href="https://www.imtiim.com" class="r-nav-btn">← IMTIIM</a>
     </div>
   </div>
 </nav>
@@ -157,9 +193,7 @@ img{max-width:100%;display:block}
     <span class="r-eyebrow"><span class="r-dot"></span> IMT Ghaziabad · RACE Club</span>
     <h1>IMT Ghaziabad <span class="grad">RACE Company Updates</span></h1>
     <p>Latest company preparation PDFs, interview insights, eligibility criteria and important updates released by the RACE Club.</p>
-    <div class="r-hero-cta">
-      <a href="#browse" class="r-btn r-btn-primary">Browse Updates ↓</a>
-    </div>
+    <div class="r-hero-cta"><a href="#browse" class="r-btn r-btn-primary">Browse Updates ↓</a></div>
     <div class="r-hero-stats">
       <div class="r-hero-stat"><b id="statTotal">—</b><span>Company Updates</span></div>
       <div class="r-hero-stat"><b id="statCategories">9</b><span>Categories</span></div>
@@ -173,7 +207,7 @@ img{max-width:100%;display:block}
     <div class="r-search-row">
       <div class="r-search">
         <span class="r-search-ic">🔍</span>
-        <input id="raceSearch" type="text" placeholder="Search by company name or keyword…" autocomplete="off" />
+        <input id="raceSearch" type="text" placeholder="Search company name or keyword…" autocomplete="off" />
       </div>
       <span class="r-result-count" id="resultCount"></span>
     </div>
@@ -198,286 +232,415 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
-<!-- ══════════════════════ ADMIN MODAL ══════════════════════ -->
+<!-- ══════════ ADMIN MODAL ══════════ -->
 <div class="r-modal-back" id="adminModal">
   <div class="r-modal">
     <div class="r-modal-head">
-      <h3>RACE Admin</h3>
-      <button class="r-modal-close" id="adminClose" type="button" aria-label="Close">✕</button>
+      <h3 id="modalTitle">🔒 Admin Login</h3>
+      <button class="r-modal-close" id="adminClose" type="button">✕</button>
     </div>
 
-    <!-- Step 1: login -->
+    <!-- LOGIN -->
     <div id="adminLogin">
-      <p class="r-modal-sub">Enter the admin username to upload company updates.</p>
       <div class="r-field">
-        <label for="adminUser">Username</label>
-        <input id="adminUser" type="text" placeholder="Username" autocomplete="off" />
+        <label>Username</label>
+        <input id="adminUser" type="text" placeholder="Enter username" autocomplete="off" />
       </div>
-      <div class="r-modal-err" id="adminErr"></div>
-      <button class="r-btn r-btn-primary r-btn-block" id="adminLoginBtn" style="width:100%" type="button">Unlock</button>
+      <div class="r-field">
+        <label>Password</label>
+        <input id="adminPass" type="password" placeholder="Enter password" />
+      </div>
+      <div class="r-err" id="loginErr"></div>
+      <button class="r-btn r-btn-primary" id="loginBtn" style="width:100%" type="button">Unlock Admin</button>
     </div>
 
-    <!-- Step 2: upload -->
+    <!-- UPLOAD PANEL -->
     <div id="adminPanel" class="r-hide">
-      <p class="r-modal-sub">Upload an Excel/CSV file — its rows appear as company update cards on this page.</p>
-      <input id="adminFile" type="file" accept=".xlsx,.xls,.csv" class="r-hide" />
-      <div class="r-drop" id="adminDrop">
-        <b>Click to choose an Excel file</b>
-        <span>.xlsx, .xls or .csv — or drag &amp; drop here</span>
+      <div class="r-field">
+        <label>Company Name *</label>
+        <input id="upCompany" type="text" placeholder="e.g. McKinsey & Company" />
       </div>
-      <div class="r-modal-err" id="adminUploadErr"></div>
-      <p class="r-count-note" id="adminCountNote"></p>
-      <div class="r-admin-actions">
-        <button class="r-link-btn" id="adminTemplate" type="button">↓ Download template</button>
-        <button class="r-link-btn" id="adminClear" type="button" style="color:var(--r-rose,#fb7185)">Clear all updates</button>
+      <div class="r-field">
+        <label>Category *</label>
+        <select id="upCategory">
+          <option value="">— select —</option>
+          <option>Consulting</option><option>FMCG</option><option>Banking</option>
+          <option>Finance</option><option>Product</option><option>Sales &amp; Marketing</option>
+          <option>Analytics</option><option>Operations</option><option>General</option>
+        </select>
       </div>
+      <div class="r-field">
+        <label>Description (optional)</label>
+        <textarea id="upDesc" placeholder="What's in this PDF? Interview tips, case prep, eligibility…"></textarea>
+      </div>
+      <div class="r-field">
+        <label>PDF File *</label>
+        <input id="upFile" type="file" accept=".pdf" class="r-hide" />
+        <div class="r-drop" id="upDrop">
+          <b id="upDropLabel">Click to choose PDF</b>
+          <span id="upDropSub">or drag &amp; drop here</span>
+        </div>
+        <div class="r-progress" id="upProgress"><div class="r-progress-bar" id="upBar" style="width:0%"></div></div>
+      </div>
+      <div class="r-err" id="upErr"></div>
+      <button class="r-btn r-btn-primary" id="upSubmit" style="width:100%" type="button">Upload &amp; Publish</button>
+
+      <hr class="r-divider" />
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:.82rem;color:var(--r-muted)">Existing updates</span>
+        <button class="r-link-btn danger" id="adminLogout" type="button">Log out</button>
+      </div>
+      <div class="r-upload-list" id="upList"></div>
     </div>
   </div>
 </div>
 
 <div class="r-toast" id="raceToast"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ============================================================================
-   IMTIIM RACE Club — self-contained page logic (no backend).
-   To add/edit an update: add an object to RACE_UPDATES below.
-   `pdf` is a link to the PDF (Google Drive share link, direct URL, etc.).
-   ============================================================================ */
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  const RACE_CATEGORIES = ['Consulting','FMCG','Banking','Finance','Product','Sales & Marketing','Analytics','Operations','General'];
-  const CATSET = RACE_CATEGORIES.map(c=>c.toLowerCase());
+/* ── CONFIG ─────────────────────────────────────────────────────────── */
+const SB_URL  = 'https://buvazktwoytakytgpgsf.supabase.co';
+const SB_KEY  = 'sb_publishable_uwATJMxoFwXgvb4kNwXuSg_NLYGZnDG';
+const BUCKET  = 'race-pdfs';
+const TABLE   = 'race_updates';
+const ADMIN_USER = '2026Race';          // displayed username
+const ADMIN_EMAIL = 'race@imtiim.local'; // Supabase auth email
 
-  const ADMIN_USERNAME = '2026Race';   // login username
-  const STORE_KEY = 'race_updates_v1'; // localStorage key (this browser only)
+const CATS = ['Consulting','FMCG','Banking','Finance','Product','Sales & Marketing','Analytics','Operations','General'];
 
-  /* -------- storage: updates are saved in this browser's localStorage ------- */
-  function loadUpdates(){
-    try{ const raw=localStorage.getItem(STORE_KEY); return raw?JSON.parse(raw):[]; }
-    catch(_){ return []; }
-  }
-  function saveUpdates(list){
-    try{ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }catch(_){}
-  }
+/* ── SUPABASE ───────────────────────────────────────────────────────── */
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
-  const PAGE_SIZE = 6;
-  const State = { all:[], filtered:[], visibleCount:PAGE_SIZE, query:'', category:'All' };
-  const $ = (s,r=document) => r.querySelector(s);
-  const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
+/* ── STATE ──────────────────────────────────────────────────────────── */
+const State = { all:[], filtered:[], visible:6, query:'', cat:'All' };
+let adminSession = null;
 
-  const fmtDate = s => new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
-  const isRecent = s => (Date.now() - new Date(s).getTime()) < 7*24*60*60*1000;
-  const esc = str => { const d=document.createElement('div'); d.textContent = str==null?'':String(str); return d.innerHTML; };
-  const debounce = (fn,w)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),w);};};
+/* ── HELPERS ────────────────────────────────────────────────────────── */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => { const d=document.createElement('div'); d.textContent=s??''; return d.innerHTML; };
+const debounce = (fn,w)=>{ let t; return(...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),w); }; };
+const fmtDate = s => new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+const isRecent = s => (Date.now()-new Date(s).getTime()) < 7*24*60*60*1000;
+const fmtBytes = b => { if(!b) return ''; if(b<1024*1024) return (b/1024).toFixed(0)+' KB'; return (b/1024/1024).toFixed(1)+' MB'; };
+let toastT;
+function toast(msg,type=''){
+  const t=$('#raceToast'); t.textContent=msg;
+  t.className='r-toast show'+(type?' '+type:'');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),3000);
+}
 
-  let toastT;
-  function toast(msg,type=''){ const t=$('#raceToast'); t.textContent=msg; t.className='r-toast show'+(type?' '+type:''); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+/* ── SKELETONS ──────────────────────────────────────────────────────── */
+function showSkeletons(){
+  $('#raceGrid').innerHTML = Array(6).fill(`
+    <div class="r-skel">
+      <div class="r-skel-top"><div class="r-skel-logo"></div>
+        <div style="flex:1"><div class="r-skel-line" style="width:60%"></div>
+        <div class="r-skel-line" style="width:40%;margin-top:8px;height:10px"></div></div></div>
+      <div class="r-skel-line"></div><div class="r-skel-line" style="width:85%"></div>
+    </div>`).join('');
+}
 
-  function buildFilterPills(){
-    const box=$('#raceFilters');
-    RACE_CATEGORIES.forEach(cat=>{ const b=document.createElement('button'); b.className='r-filter-pill'; b.dataset.cat=cat; b.textContent=cat; box.appendChild(b); });
-    box.addEventListener('click',e=>{ const b=e.target.closest('.r-filter-pill'); if(!b) return;
-      $$('.r-filter-pill',box).forEach(x=>x.classList.remove('active')); b.classList.add('active');
-      State.category=b.dataset.cat; State.visibleCount=PAGE_SIZE; applyFilters(); });
-  }
-
-  function cardHtml(rec){
-    const initials=(rec.company||'?').trim().replace(/[^A-Za-z ]/g,'').split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    return `
-    <article class="r-card" data-id="${rec.id}">
-      <div class="r-card-top">
-        <div class="r-card-logo">${initials}</div>
-        <div class="r-card-head">
-          <div class="r-card-name" title="${esc(rec.company)}">${esc(rec.company)}</div>
-          <div class="r-card-meta">
-            <span class="r-badge r-badge-cat">${esc(rec.category)}</span>
-            ${isRecent(rec.date)?'<span class="r-badge r-badge-new">✦ Recent</span>':''}
-          </div>
+/* ── CARDS ──────────────────────────────────────────────────────────── */
+function initials(name){
+  return (name||'?').replace(/[^A-Za-z ]/g,'').split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,2).toUpperCase()||'?';
+}
+function cardHtml(r){
+  return `
+  <article class="r-card" data-id="${r.id}">
+    <button class="r-card-del" data-del="${r.id}" title="Delete this update">✕</button>
+    <div class="r-card-top">
+      <div class="r-card-logo">${initials(r.company_name)}</div>
+      <div class="r-card-head">
+        <div class="r-card-name" title="${esc(r.company_name)}">${esc(r.company_name)}</div>
+        <div class="r-card-meta">
+          <span class="r-badge r-badge-cat">${esc(r.category)}</span>
+          ${isRecent(r.created_at)?'<span class="r-badge r-badge-new">✦ New</span>':''}
         </div>
       </div>
-      <p class="r-card-desc">${esc(rec.desc)}</p>
-      <div class="r-card-stats">
-        <span>📅 ${fmtDate(rec.date)}</span>
-        <span>👁 ${rec.views||0}</span>
-        <span>⬇ ${rec.downloads||0}</span>
-      </div>
-      <div class="r-card-actions">
-        ${rec.pdf
-          ? `<a class="r-btn r-btn-primary" href="${esc(rec.pdf)}" target="_blank" rel="noopener" data-action="view">View / Download</a>
-             <button class="r-card-icon-btn" data-action="copy" title="Copy link">🔗</button>`
-          : `<span class="r-btn r-btn-ghost" style="cursor:default;opacity:.6">No link provided</span>`}
-      </div>
-    </article>`;
-  }
+    </div>
+    <p class="r-card-desc">${esc(r.description||'No description provided.')}</p>
+    <div class="r-card-stats">
+      <span>📅 ${fmtDate(r.created_at)}</span>
+      ${r.pdf_size_bytes?`<span>📄 ${fmtBytes(r.pdf_size_bytes)}</span>`:''}
+      <span>👁 ${r.view_count||0}</span>
+      <span>⬇ ${r.download_count||0}</span>
+    </div>
+    <div class="r-card-actions">
+      <a class="r-btn r-btn-primary" href="${esc(r.pdf_url)}" target="_blank" rel="noopener"
+         data-action="view" data-id="${r.id}">View PDF</a>
+      <a class="r-btn r-btn-ghost" href="${esc(r.pdf_url)}" download target="_blank" rel="noopener"
+         data-action="dl" data-id="${r.id}">Download</a>
+    </div>
+  </article>`;
+}
 
-  function renderGrid(){
-    const grid=$('#raceGrid');
-    const slice=State.filtered.slice(0,State.visibleCount);
-    if(State.filtered.length===0){
-      const empty = State.all.length===0
-        ? `<h3>No company updates yet.</h3><p>RACE Club admins can add updates from the 🔒 Admin button above.</p>`
-        : `<h3>No updates match your search.</h3><p>Try a different company name or category.</p>`;
-      grid.innerHTML=`<div class="r-empty" style="grid-column:1/-1"><div class="r-empty-ic">📭</div>${empty}</div>`;
-      $('#loadMoreWrap').style.display='none'; $('#resultCount').textContent=''; return;
+function renderGrid(){
+  const grid = $('#raceGrid');
+  const slice = State.filtered.slice(0, State.visible);
+  if(!State.filtered.length){
+    const msg = State.all.length===0
+      ? '<h3>No updates yet.</h3><p>RACE Club admin can add PDFs from the 🔒 Admin button above.</p>'
+      : '<h3>No results found.</h3><p>Try a different search term or category.</p>';
+    grid.innerHTML = `<div class="r-empty"><div class="r-empty-ic">📭</div>${msg}</div>`;
+    $('#loadMoreWrap').style.display='none';
+    $('#resultCount').textContent='';
+    return;
+  }
+  grid.innerHTML = slice.map(cardHtml).join('');
+  $('#resultCount').textContent = `${State.filtered.length} update${State.filtered.length===1?'':'s'}`;
+  $('#loadMoreWrap').style.display = State.visible < State.filtered.length ? 'block' : 'none';
+}
+
+function updateStats(){
+  $('#statTotal').textContent = State.all.length;
+  $('#statRecent').textContent = State.all.filter(r=>isRecent(r.created_at)).length;
+}
+
+/* ── FETCH ──────────────────────────────────────────────────────────── */
+async function fetchUpdates(){
+  const { data, error } = await sb.from(TABLE).select('*').order('created_at',{ascending:false});
+  if(error) throw error;
+  return data || [];
+}
+
+async function loadPage(){
+  showSkeletons();
+  try {
+    State.all = await fetchUpdates();
+    State.visible = 6;
+    updateStats(); applyFilters();
+  } catch(e){
+    $('#raceGrid').innerHTML = `<div class="r-empty"><div class="r-empty-ic">⚠️</div>
+      <h3>Could not load updates.</h3><p>Please check your connection and try again.</p></div>`;
+  }
+}
+
+/* ── FILTER / SEARCH ────────────────────────────────────────────────── */
+function buildPills(){
+  const box = $('#raceFilters');
+  CATS.forEach(cat=>{
+    const b = document.createElement('button');
+    b.className='r-filter-pill'; b.dataset.cat=cat; b.textContent=cat;
+    box.appendChild(b);
+  });
+  box.addEventListener('click', e=>{
+    const b = e.target.closest('.r-filter-pill'); if(!b) return;
+    $$('.r-filter-pill').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); State.cat=b.dataset.cat; State.visible=6; applyFilters();
+  });
+}
+
+function applyFilters(){
+  const q = State.query.toLowerCase();
+  State.filtered = State.all.filter(r=>{
+    const mCat = State.cat==='All' || r.category===State.cat;
+    const mQ = !q || (r.company_name||'').toLowerCase().includes(q)
+                  || (r.description||'').toLowerCase().includes(q)
+                  || (r.category||'').toLowerCase().includes(q);
+    return mCat && mQ;
+  });
+  renderGrid();
+}
+
+/* ── GRID ACTIONS (view / download counters + delete) ───────────────── */
+function wireGrid(){
+  $('#raceGrid').addEventListener('click', async e=>{
+    // delete button (admin only)
+    const del = e.target.closest('[data-del]');
+    if(del && adminSession){
+      if(!confirm('Delete this update? It cannot be undone.')) return;
+      const id = del.dataset.del;
+      await sb.from(TABLE).delete().eq('id',id);
+      State.all = State.all.filter(r=>r.id!==id);
+      applyFilters(); updateStats(); renderAdminList();
+      toast('Update deleted','success'); return;
     }
-    grid.innerHTML=slice.map(cardHtml).join('');
-    $('#resultCount').textContent=`${State.filtered.length} update${State.filtered.length===1?'':'s'}`;
-    $('#loadMoreWrap').style.display=State.visibleCount<State.filtered.length?'block':'none';
-  }
+    const a = e.target.closest('[data-action]'); if(!a) return;
+    const id = a.dataset.id;
+    if(a.dataset.action==='view')   sb.rpc('increment_view',{row_id:id}).catch(()=>{});
+    if(a.dataset.action==='dl')     sb.rpc('increment_download',{row_id:id}).catch(()=>{});
+  });
+  $('#loadMoreBtn').addEventListener('click',()=>{ State.visible+=6; renderGrid(); });
+  $('#raceSearch').addEventListener('input', debounce(()=>{
+    State.query=$('#raceSearch').value; State.visible=6; applyFilters();
+  },160));
+}
 
-  function wireGridActions(){
-    $('#raceGrid').addEventListener('click',async e=>{
-      const card=e.target.closest('.r-card'); if(!card) return;
-      const rec=State.all.find(r=>r.id===card.dataset.id); if(!rec) return;
-      const btn=e.target.closest('[data-action]'); if(!btn) return;
-      const action=btn.dataset.action;
-      if(action==='view'){ rec.views=(rec.views||0)+1; }
-      if(action==='copy'){ e.preventDefault();
-        try{ await navigator.clipboard.writeText(rec.pdf); }catch(_){}
-        toast('Link copied to clipboard','success'); }
+/* ── ADMIN MODAL ────────────────────────────────────────────────────── */
+function openModal(){
+  $('#adminModal').classList.add('show');
+  $('#loginErr').textContent='';
+  if(!adminSession) setTimeout(()=>$('#adminUser').focus(),60);
+}
+function closeModal(){ $('#adminModal').classList.remove('show'); }
+
+function showPanel(){
+  $('#adminLogin').classList.add('r-hide');
+  $('#adminPanel').classList.remove('r-hide');
+  $('#modalTitle').textContent='📤 Upload Company Update';
+  $('#adminOpen').classList.add('admin-active');
+  document.body.classList.add('admin-mode');
+  renderAdminList();
+}
+function showLogin(){
+  $('#adminPanel').classList.add('r-hide');
+  $('#adminLogin').classList.remove('r-hide');
+  $('#modalTitle').textContent='🔒 Admin Login';
+  $('#adminOpen').classList.remove('admin-active');
+  document.body.classList.remove('admin-mode');
+}
+
+async function tryLogin(){
+  const user = $('#adminUser').value.trim();
+  const pass = $('#adminPass').value;
+  $('#loginErr').textContent='';
+  if(user !== ADMIN_USER){ $('#loginErr').textContent='Incorrect username.'; return; }
+  const btn = $('#loginBtn');
+  btn.disabled=true; btn.textContent='Checking…';
+  const { data, error } = await sb.auth.signInWithPassword({ email:ADMIN_EMAIL, password:pass });
+  btn.disabled=false; btn.textContent='Unlock Admin';
+  if(error){ $('#loginErr').textContent='Incorrect password.'; return; }
+  adminSession = data.session;
+  showPanel();
+}
+
+async function doLogout(){
+  await sb.auth.signOut();
+  adminSession=null; showLogin(); closeModal();
+  toast('Logged out');
+}
+
+/* ── ADMIN LIST ─────────────────────────────────────────────────────── */
+function renderAdminList(){
+  const box = $('#upList');
+  if(!State.all.length){ box.innerHTML='<p style="color:var(--r-muted-2);font-size:.8rem;padding:8px 0">No uploads yet.</p>'; return; }
+  box.innerHTML = State.all.slice(0,20).map(r=>`
+    <div class="r-upload-item">
+      <span class="r-upload-item-name">${esc(r.company_name)}</span>
+      <span class="r-upload-item-cat">${esc(r.category)}</span>
+      <button class="r-link-btn danger" data-del="${r.id}" style="font-size:.76rem;margin-left:6px">✕</button>
+    </div>`).join('');
+  box.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      if(!confirm('Delete this update?')) return;
+      const id=btn.dataset.del;
+      await sb.from(TABLE).delete().eq('id',id);
+      State.all=State.all.filter(r=>r.id!==id);
+      applyFilters(); updateStats(); renderAdminList();
+      toast('Deleted','success');
     });
+  });
+}
+
+/* ── PDF UPLOAD ─────────────────────────────────────────────────────── */
+let selectedFile = null;
+
+function wireUpload(){
+  const drop=$('#upDrop'), fileIn=$('#upFile');
+
+  drop.addEventListener('click',()=>fileIn.click());
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
+  drop.addEventListener('drop',e=>{ const f=e.dataTransfer.files[0]; if(f) setFile(f); });
+  fileIn.addEventListener('change',()=>{ if(fileIn.files[0]) setFile(fileIn.files[0]); });
+
+  function setFile(f){
+    if(!f.name.endsWith('.pdf')){ toast('Please select a PDF file','error'); return; }
+    selectedFile=f;
+    drop.classList.add('has-file');
+    $('#upDropLabel').textContent=f.name;
+    $('#upDropSub').textContent=fmtBytes(f.size);
   }
 
-  function applyFilters(){
-    const q=State.query.trim().toLowerCase();
-    State.filtered=State.all.filter(r=>{
-      const mCat=State.category==='All'||r.category===State.category;
-      const mQ=!q||r.company.toLowerCase().includes(q)||r.desc.toLowerCase().includes(q)||r.category.toLowerCase().includes(q);
-      return mCat&&mQ;
-    });
-    renderGrid();
-  }
+  $('#upSubmit').addEventListener('click', async ()=>{
+    const company = $('#upCompany').value.trim();
+    const category = $('#upCategory').value;
+    const desc = $('#upDesc').value.trim();
+    $('#upErr').textContent='';
 
-  function wireSearch(){
-    const input=$('#raceSearch');
-    input.addEventListener('input',debounce(()=>{ State.query=input.value; State.visibleCount=PAGE_SIZE; applyFilters(); },160));
-  }
-  function wireLoadMore(){
-    $('#loadMoreBtn').addEventListener('click',()=>{ State.visibleCount+=PAGE_SIZE; renderGrid(); });
-  }
-  function updateHeroStats(){
-    $('#statTotal').textContent=State.all.length;
-    $('#statRecent').textContent=State.all.filter(r=>isRecent(r.date)).length;
-  }
+    if(!company){ $('#upErr').textContent='Company name is required.'; return; }
+    if(!category){ $('#upErr').textContent='Please select a category.'; return; }
+    if(!selectedFile){ $('#upErr').textContent='Please choose a PDF file.'; return; }
 
-  function refreshFromStore(){
-    State.all=loadUpdates().slice().sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
-    State.visibleCount=PAGE_SIZE;
-    updateHeroStats(); applyFilters();
-  }
+    const btn=$('#upSubmit');
+    btn.disabled=true; btn.textContent='Uploading…';
+    $('#upProgress').classList.add('show'); $('#upBar').style.width='20%';
 
-  /* ==========================================================================
-     ADMIN — login + Excel/CSV upload (stored in this browser's localStorage)
-     ========================================================================== */
-  const pick = (row, keys) => {
-    for(const k of Object.keys(row)){
-      const norm=k.trim().toLowerCase();
-      if(keys.includes(norm)) return row[k];
+    try{
+      // 1. upload PDF
+      const safeName = selectedFile.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+      const path = `${Date.now()}_${safeName}`;
+      const { error:upError } = await sb.storage.from(BUCKET).upload(path, selectedFile, {
+        cacheControl:'3600', upsert:false, contentType:'application/pdf'
+      });
+      if(upError) throw upError;
+      $('#upBar').style.width='60%';
+
+      // 2. get public URL
+      const { data:urlData } = sb.storage.from(BUCKET).getPublicUrl(path);
+      $('#upBar').style.width='80%';
+
+      // 3. insert row
+      const { data:row, error:dbError } = await sb.from(TABLE).insert({
+        company_name: company,
+        category,
+        description: desc||null,
+        pdf_url: urlData.publicUrl,
+        pdf_size_bytes: selectedFile.size
+      }).select().single();
+      if(dbError) throw dbError;
+      $('#upBar').style.width='100%';
+
+      // success
+      State.all.unshift(row);
+      applyFilters(); updateStats(); renderAdminList();
+      toast(`"${company}" published for everyone!`, 'success');
+
+      // reset form
+      $('#upCompany').value=''; $('#upCategory').value=''; $('#upDesc').value='';
+      selectedFile=null; fileIn.value='';
+      drop.classList.remove('has-file');
+      $('#upDropLabel').textContent='Click to choose PDF';
+      $('#upDropSub').textContent='or drag & drop here';
+
+    } catch(err){
+      console.error(err);
+      $('#upErr').textContent = err.message || 'Upload failed. Please try again.';
+    } finally{
+      btn.disabled=false; btn.textContent='Upload & Publish';
+      setTimeout(()=>{ $('#upProgress').classList.remove('show'); $('#upBar').style.width='0%'; },600);
     }
-    return '';
-  };
-  function excelDate(v){
-    if(v==null||v==='') return new Date().toISOString().slice(0,10);
-    if(typeof v==='number'){ // Excel serial date
-      const d=new Date(Math.round((v-25569)*86400*1000));
-      if(!isNaN(d)) return d.toISOString().slice(0,10);
-    }
-    const d=new Date(v);
-    return isNaN(d)? new Date().toISOString().slice(0,10) : d.toISOString().slice(0,10);
-  }
-  function normCategory(v){
-    const s=String(v||'').trim();
-    const i=CATSET.indexOf(s.toLowerCase());
-    return i>=0 ? RACE_CATEGORIES[i] : (s || 'General');
-  }
-  function rowsToUpdates(rows){
-    return rows.map((row,idx)=>{
-      const company=String(pick(row,['company','company name','name','organisation','organization'])||'').trim();
-      if(!company) return null;
-      return {
-        id:'x'+Date.now()+'_'+idx,
-        company,
-        category:normCategory(pick(row,['category','type','sector','domain'])),
-        desc:String(pick(row,['description','desc','details','summary','notes'])||'').trim(),
-        date:excelDate(pick(row,['date','upload date','added','posted'])),
-        pdf:String(pick(row,['link','pdf','pdf link','url','file','drive link','document'])||'').trim(),
-        views:0, downloads:0
-      };
-    }).filter(Boolean);
-  }
+  });
+}
 
-  function wireAdmin(){
-    const modal=$('#adminModal'), loginBox=$('#adminLogin'), panel=$('#adminPanel');
-    const userIn=$('#adminUser'), err=$('#adminErr'), upErr=$('#adminUploadErr'), note=$('#adminCountNote');
-    const fileIn=$('#adminFile'), drop=$('#adminDrop');
+/* ── BOOT ───────────────────────────────────────────────────────────── */
+function boot(){
+  buildPills(); wireGrid(); wireUpload();
 
-    function open(){ modal.classList.add('show'); err.textContent=''; setTimeout(()=>userIn.focus(),50); refreshNote(); }
-    function close(){ modal.classList.remove('show'); }
-    function refreshNote(){ const n=loadUpdates().length; note.textContent = n? `${n} update${n===1?'':'s'} currently live on this page.` : 'No updates yet — upload an Excel to add some.'; }
+  $('#adminOpen').addEventListener('click', ()=>{ openModal(); if(adminSession) showPanel(); });
+  $('#adminClose').addEventListener('click', closeModal);
+  $('#adminModal').addEventListener('click', e=>{ if(e.target===$('#adminModal')) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+  $('#loginBtn').addEventListener('click', tryLogin);
+  $('#adminUser').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#adminPass').focus(); });
+  $('#adminPass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+  $('#adminLogout').addEventListener('click', doLogout);
 
-    $('#adminOpen').addEventListener('click',open);
-    $('#adminClose').addEventListener('click',close);
-    modal.addEventListener('click',e=>{ if(e.target===modal) close(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  // restore session if still valid
+  sb.auth.getSession().then(({data})=>{
+    if(data.session){ adminSession=data.session; document.body.classList.add('admin-mode'); $('#adminOpen').classList.add('admin-active'); }
+  });
 
-    function tryLogin(){
-      if(userIn.value.trim()===ADMIN_USERNAME){
-        loginBox.classList.add('r-hide'); panel.classList.remove('r-hide'); err.textContent=''; refreshNote();
-      } else { err.textContent='Incorrect username.'; }
-    }
-    $('#adminLoginBtn').addEventListener('click',tryLogin);
-    userIn.addEventListener('keydown',e=>{ if(e.key==='Enter') tryLogin(); });
+  loadPage();
+}
 
-    /* ---- file handling ---- */
-    drop.addEventListener('click',()=>fileIn.click());
-    ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
-    ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
-    drop.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
-    fileIn.addEventListener('change',()=>{ if(fileIn.files[0]) handleFile(fileIn.files[0]); });
-
-    function handleFile(file){
-      upErr.textContent='';
-      if(typeof XLSX==='undefined'){ upErr.textContent='Spreadsheet reader failed to load — check your connection and reload.'; return; }
-      const reader=new FileReader();
-      reader.onload=e=>{
-        try{
-          const wb=XLSX.read(e.target.result,{type:'array'});
-          const ws=wb.Sheets[wb.SheetNames[0]];
-          const rows=XLSX.utils.sheet_to_json(ws,{defval:''});
-          const updates=rowsToUpdates(rows);
-          if(updates.length===0){ upErr.textContent='No rows with a Company name were found. Check the column headings.'; return; }
-          const merged=loadUpdates().concat(updates);
-          saveUpdates(merged);
-          refreshFromStore(); refreshNote();
-          toast(`Added ${updates.length} update${updates.length===1?'':'s'}`,'success');
-        }catch(err){ console.error(err); upErr.textContent='Could not read that file. Please upload a valid .xlsx, .xls or .csv.'; }
-        fileIn.value='';
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    /* ---- template + clear ---- */
-    $('#adminTemplate').addEventListener('click',()=>{
-      const sample=[{Company:'McKinsey & Company',Category:'Consulting',Description:'SIP prep pack — PST practice, case frameworks and eligibility criteria.',Date:new Date().toISOString().slice(0,10),Link:'https://drive.google.com/your-pdf-link'}];
-      const ws=XLSX.utils.json_to_sheet(sample);
-      const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Updates');
-      XLSX.writeFile(wb,'RACE-updates-template.xlsx');
-    });
-    $('#adminClear').addEventListener('click',()=>{
-      if(!loadUpdates().length){ toast('Nothing to clear'); return; }
-      if(confirm('Remove ALL company updates from this page? This cannot be undone.')){
-        saveUpdates([]); refreshFromStore(); refreshNote(); toast('All updates cleared','success');
-      }
-    });
-  }
-
-  function boot(){
-    buildFilterPills(); wireSearch(); wireGridActions(); wireLoadMore(); wireAdmin();
-    refreshFromStore();
-  }
-  document.addEventListener('DOMContentLoaded',boot);
+document.addEventListener('DOMContentLoaded', boot);
 })();
 </script>
 </body>
