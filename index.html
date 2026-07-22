@@ -123,6 +123,20 @@ body.admin-mode .r-card-del{display:grid}
 .r-footer{border-top:1px solid var(--r-border);padding:34px 0;text-align:center;color:var(--r-muted-2);font-size:.82rem}
 .r-footer b{color:var(--r-muted)}
 
+/* lead gate modal */
+.r-lead-back{position:fixed;inset:0;z-index:450;background:rgba(5,7,14,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.r-lead-back.show{display:flex}
+.r-lead-box{width:100%;max-width:420px;background:var(--r-bg-alt);border:1px solid var(--r-border-2);border-radius:var(--r-radius);padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.r-lead-icon{font-size:2rem;margin-bottom:12px;text-align:center}
+.r-lead-box h3{font-family:var(--r-display);font-size:1.2rem;font-weight:800;color:#fff;text-align:center;margin-bottom:6px}
+.r-lead-box p{color:var(--r-muted);font-size:.88rem;text-align:center;margin-bottom:22px}
+.r-lead-input{width:100%;background:var(--r-surface);border:1.5px solid var(--r-border);color:var(--r-text);padding:13px 15px;border-radius:11px;font-size:.92rem;font-family:inherit;margin-bottom:12px;transition:border-color .2s,background .2s;display:block}
+.r-lead-input::placeholder{color:var(--r-muted-2)}
+.r-lead-input:focus{outline:none;border-color:var(--r-accent);background:var(--r-surface-2)}
+.r-lead-input.invalid{border-color:var(--r-rose)}
+.r-lead-err{color:var(--r-rose);font-size:.8rem;margin-bottom:10px;min-height:1em;text-align:center}
+.r-lead-note{color:var(--r-muted-2);font-size:.74rem;text-align:center;margin-top:12px}
+
 /* modal */
 .r-modal-back{position:fixed;inset:0;z-index:400;background:rgba(5,7,14,.76);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
 .r-modal-back.show{display:flex}
@@ -296,6 +310,21 @@ body.admin-mode .r-card-del{display:grid}
   </div>
 </div>
 
+<!-- ══════════ LEAD GATE MODAL ══════════ -->
+<div class="r-lead-back" id="leadModal">
+  <div class="r-lead-box">
+    <div class="r-lead-icon">📄</div>
+    <h3>Get Free Access to this PDF</h3>
+    <p>Enter your details below to instantly view and download RACE Club company updates.</p>
+    <input class="r-lead-input" id="leadName"  type="text"  placeholder="Full Name *" autocomplete="name" />
+    <input class="r-lead-input" id="leadPhone" type="tel"   placeholder="Phone Number *" autocomplete="tel" />
+    <input class="r-lead-input" id="leadEmail" type="email" placeholder="Email Address *" autocomplete="email" />
+    <div class="r-lead-err" id="leadErr"></div>
+    <button class="r-btn r-btn-primary" id="leadSubmit" style="width:100%;padding:14px" type="button">Get Access →</button>
+    <p class="r-lead-note">🔒 Your details are safe and will never be shared.</p>
+  </div>
+</div>
+
 <div class="r-toast" id="raceToast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -308,8 +337,10 @@ const SB_URL  = 'https://buvazktwoytakytgpgsf.supabase.co';
 const SB_KEY  = 'sb_publishable_uwATJMxoFwXgvb4kNwXuSg_NLYGZnDG';
 const BUCKET  = 'race-pdfs';
 const TABLE   = 'race_updates';
-const ADMIN_USER = '2026Race';          // displayed username
-const ADMIN_EMAIL = 'race@imtiim.local'; // Supabase auth email
+const ADMIN_USER  = '2026Race';
+const ADMIN_EMAIL = 'race@imtiim.local';
+const SHEET_URL   = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; // ← replace after deploy
+const LEAD_KEY    = 'race_lead_v1';
 
 const CATS = ['Consulting','FMCG','Banking','Finance','Product','Sales & Marketing','Analytics','Operations','General'];
 
@@ -372,10 +403,8 @@ function cardHtml(r){
       <span>⬇ ${r.download_count||0}</span>
     </div>
     <div class="r-card-actions">
-      <a class="r-btn r-btn-primary" href="${esc(r.pdf_url)}" target="_blank" rel="noopener"
-         data-action="view" data-id="${r.id}">View PDF</a>
-      <a class="r-btn r-btn-ghost" href="${esc(r.pdf_url)}" download target="_blank" rel="noopener"
-         data-action="dl" data-id="${r.id}">Download</a>
+      <button class="r-btn r-btn-primary" data-action="view" data-id="${r.id}">View PDF</button>
+      <button class="r-btn r-btn-ghost"    data-action="dl"   data-id="${r.id}">Download</button>
     </div>
   </article>`;
 }
@@ -448,6 +477,58 @@ function applyFilters(){
   renderGrid();
 }
 
+/* ── LEAD GATE ──────────────────────────────────────────────────────── */
+let pendingPdf = null; // { url, company, action, id }
+
+function hasLead(){ return !!localStorage.getItem(LEAD_KEY); }
+
+function openLeadModal(pdf){ pendingPdf=pdf; $('#leadModal').classList.add('show'); setTimeout(()=>$('#leadName').focus(),60); }
+function closeLeadModal(){ $('#leadModal').classList.remove('show'); pendingPdf=null; }
+
+async function submitLead(){
+  const name  = $('#leadName').value.trim();
+  const phone = $('#leadPhone').value.trim();
+  const email = $('#leadEmail').value.trim();
+  $('#leadErr').textContent='';
+  [$('#leadName'),$('#leadPhone'),$('#leadEmail')].forEach(el=>el.classList.remove('invalid'));
+
+  if(!name)  { $('#leadName').classList.add('invalid');  $('#leadErr').textContent='Please enter your name.'; return; }
+  if(!phone || !/^[0-9+\s\-()]{7,15}$/.test(phone)){ $('#leadPhone').classList.add('invalid'); $('#leadErr').textContent='Please enter a valid phone number.'; return; }
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ $('#leadEmail').classList.add('invalid'); $('#leadErr').textContent='Please enter a valid email address.'; return; }
+
+  const btn=$('#leadSubmit'); btn.disabled=true; btn.textContent='Please wait…';
+
+  // send to Google Sheet (fire-and-forget, no-cors)
+  if(SHEET_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'){
+    fetch(SHEET_URL, {
+      method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name, phone, email, company: pendingPdf?.company||'', ts: new Date().toISOString() })
+    }).catch(()=>{});
+  }
+
+  // save locally so they aren't asked again
+  localStorage.setItem(LEAD_KEY, JSON.stringify({ name, phone, email, ts: Date.now() }));
+
+  closeLeadModal();
+  btn.disabled=false; btn.textContent='Get Access →';
+
+  // now open the PDF they wanted
+  if(pendingPdf){
+    if(pendingPdf.action==='view') sb.rpc('increment_view',{row_id:pendingPdf.id}).catch(()=>{});
+    if(pendingPdf.action==='dl')   sb.rpc('increment_download',{row_id:pendingPdf.id}).catch(()=>{});
+    window.open(pendingPdf.url,'_blank','noopener');
+  }
+}
+
+function wireLeadModal(){
+  $('#leadSubmit').addEventListener('click', submitLead);
+  [$('#leadName'),$('#leadPhone'),$('#leadEmail')].forEach(el=>{
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter') submitLead(); });
+  });
+  // no close on backdrop click — gate must be filled
+}
+
 /* ── GRID ACTIONS (view / download counters + delete) ───────────────── */
 function wireGrid(){
   $('#raceGrid').addEventListener('click', async e=>{
@@ -461,11 +542,31 @@ function wireGrid(){
       applyFilters(); updateStats(); renderAdminList();
       toast('Update deleted','success'); return;
     }
+
     const a = e.target.closest('[data-action]'); if(!a) return;
+    e.preventDefault(); // always intercept first
     const id = a.dataset.id;
-    if(a.dataset.action==='view')   sb.rpc('increment_view',{row_id:id}).catch(()=>{});
-    if(a.dataset.action==='dl')     sb.rpc('increment_download',{row_id:id}).catch(()=>{});
+    const rec = State.all.find(r=>r.id===id); if(!rec) return;
+    const action = a.dataset.action;
+
+    // admin always gets direct access
+    if(adminSession){
+      sb.rpc(action==='view'?'increment_view':'increment_download',{row_id:id}).catch(()=>{});
+      window.open(rec.pdf_url,'_blank','noopener');
+      return;
+    }
+
+    // public visitors must fill lead form first
+    if(!hasLead()){
+      openLeadModal({ url: rec.pdf_url, company: rec.company_name, action, id });
+      return;
+    }
+
+    // already submitted — open directly
+    sb.rpc(action==='view'?'increment_view':'increment_download',{row_id:id}).catch(()=>{});
+    window.open(rec.pdf_url,'_blank','noopener');
   });
+
   $('#loadMoreBtn').addEventListener('click',()=>{ State.visible+=6; renderGrid(); });
   $('#raceSearch').addEventListener('input', debounce(()=>{
     State.query=$('#raceSearch').value; State.visible=6; applyFilters();
@@ -621,7 +722,7 @@ function wireUpload(){
 
 /* ── BOOT ───────────────────────────────────────────────────────────── */
 function boot(){
-  buildPills(); wireGrid(); wireUpload();
+  buildPills(); wireGrid(); wireUpload(); wireLeadModal();
 
   $('#adminOpen').addEventListener('click', ()=>{ openModal(); if(adminSession) showPanel(); });
   $('#adminClose').addEventListener('click', closeModal);
